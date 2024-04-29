@@ -6,8 +6,13 @@ def palindrome_check(string: str):
     if len(string) < 1:
         raise ValueError
 
+    clear_string = ""
+    for char in string:
+        if char.isalnum():
+            clear_string += char
+
     d = deque()
-    d.extend(string.lower())
+    d.extend(clear_string.lower())
 
     while len(d) > 1:
         if d.popleft() != d.pop():
@@ -24,12 +29,8 @@ while True:
     input_string = input("Введіть слово для перевірки ->")
 
     try:
-        word = input_string.strip(' ').split(" ")[
-            0
-        ]  # якщо введено декілька слів, то перевіряється тільки перше слово, усі інші - ігноруються
-
-        result = "" if palindrome_check(word) else " не"
-        print(f"'{word}'{result} є паліндромом.\n")
+        result = "" if palindrome_check(input_string) else " не"
+        print(f"'{input_string}'{result} є паліндромом.\n")
 
     except ValueError:
         print('Помилка введення. Спробуйте ще раз')
